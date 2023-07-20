@@ -2,6 +2,7 @@ import {
   Button,
   FlatList,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -33,35 +34,42 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add Goal" color="#5e0acc" onPress={startAddGoalHandler} />
-      {modalIsVisible && (
-        <GoalInput
-          onClose={closeAddGoalHandler}
-          isVisible={modalIsVisible}
-          onGoalAdd={addGoalHandler}
+    <>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.appContainer}>
+        <Button
+          title="Add Goal"
+          color="#a065ec"
+          onPress={startAddGoalHandler}
         />
-      )}
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={goals}
-          keyExtractor={(item) => item.id}
-          renderItem={(itemData) => (
-            <GoalItem
-              id={itemData.item.id}
-              onDelete={deleteGoalHandler}
-              text={itemData.item.goal}
-            />
-          )}
-        ></FlatList>
+        {modalIsVisible && (
+          <GoalInput
+            onClose={closeAddGoalHandler}
+            isVisible={modalIsVisible}
+            onGoalAdd={addGoalHandler}
+          />
+        )}
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={goals}
+            keyExtractor={(item) => item.id}
+            renderItem={(itemData) => (
+              <GoalItem
+                id={itemData.item.id}
+                onDelete={deleteGoalHandler}
+                text={itemData.item.goal}
+              />
+            )}
+          ></FlatList>
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   appContainer: {
-    paddingTop: 50,
+    paddingTop: 60,
     paddingHorizontal: 16,
     flex: 1,
   },
